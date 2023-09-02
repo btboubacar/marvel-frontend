@@ -13,6 +13,8 @@ import Characters from "./pages/Characters";
 import CharacterComics from "./pages/Character-Comics";
 import Comics from "./pages/Comics";
 import ComicDetail from "./pages/ComicDetail";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
 
 // External libraries
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -20,8 +22,10 @@ import {
   faBookmark,
   faThumbsUp,
   faMagnifyingGlass,
+  faUser,
+  faCamera,
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faBookmark, faThumbsUp, faMagnifyingGlass);
+library.add(faBookmark, faThumbsUp, faMagnifyingGlass, faUser, faCamera);
 
 function App() {
   // console.log(typeof Cookies.get("__marvel_char_favorites"));
@@ -39,6 +43,7 @@ function App() {
   const [showFavorites, setShowFavorites] = useState(false);
   const [favorite, setFavorite] = useState("Favorites");
   const [mode, setMode] = useState(true); // dark
+  const [token, setToken] = useState(Cookies.get("token" || null));
 
   // ----------
   const handleFavorites = (favoriteType, id, del) => {
@@ -120,6 +125,8 @@ function App() {
         setFavorite={setFavorite}
         setMode={setMode}
         mode={mode}
+        token={token}
+        setToken={setToken}
       />
       <Routes>
         {/* <Route
@@ -173,6 +180,8 @@ function App() {
             />
           }
         />
+        <Route path="/signup" element={<Signup setToken={setToken} />} />
+        <Route path="/login" element={<Login setToken={setToken} />} />
       </Routes>
     </Router>
   );

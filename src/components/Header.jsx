@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import logo from "../assets/img/logo.png";
 import SliderSwitch from "../components/SliderSwitch";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Cookies from "js-cookie";
 
 const Header = ({
   userFavorites,
@@ -10,6 +12,8 @@ const Header = ({
   favorite,
   mode,
   setMode,
+  token,
+  setToken,
 }) => {
   return (
     <header className="container">
@@ -39,8 +43,33 @@ const Header = ({
             <option>Comics</option>
           </select>
         </nav>
-        <div>
-          <SliderSwitch mode={mode} setMode={setMode} />
+
+        <div className="account">
+          {token ? (
+            <button
+              style={{ backgroundColor: "tomato" }}
+              onClick={() => {
+                Cookies.remove("token");
+                setToken(null);
+              }}
+            >
+              logout
+            </button>
+          ) : (
+            <>
+              <Link to={"/login"}>
+                <button>login</button>
+              </Link>
+              <Link to={"/signup"}>
+                <button>signup</button>
+              </Link>
+            </>
+          )}
+
+          <FontAwesomeIcon icon="user" className="user" />
+          <div>
+            <SliderSwitch mode={mode} setMode={setMode} />
+          </div>
         </div>
       </div>
     </header>

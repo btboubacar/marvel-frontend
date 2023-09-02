@@ -21,7 +21,7 @@ class SliderSwitch extends Component {
           onChange={this.handleChange}
           checked={this.props.mode}
           offColor="#2CB1BA"
-          onColor="#2CB1BA"
+          // onColor="#2CB1BA"
           handleDiameter={25}
           width={60}
           uncheckedIcon={<div></div>}
@@ -33,9 +33,10 @@ class SliderSwitch extends Component {
                 alignItems: "center",
                 height: "100%",
                 fontSize: 20,
+                color: "red",
               }}
             >
-              {/* ↑ */}
+              ☀{/* ↑ */}
             </div>
           }
           checkedIcon={<div></div>}
@@ -52,7 +53,7 @@ class SliderSwitch extends Component {
                 borderRadius: "50%",
               }}
             >
-              {/* ↓ */}
+              ☽{/* ↓ */}
             </div>
           }
         />
