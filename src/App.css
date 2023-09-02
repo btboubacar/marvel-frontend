@@ -1,0 +1,377 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap");
+
+:root {
+  --max-width: 1300px;
+  --main-width: 1300px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+a {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  text-decoration: none;
+}
+
+input {
+  font-family: inherit;
+  font-size: inherit;
+  border: inherit;
+}
+
+h1 {
+  font-size: 40px;
+  margin: 10px auto;
+}
+/* -- header */
+
+/* .container {
+  max-width: 100%;
+} */
+
+progress {
+  position: absolute;
+  top: 200px;
+  left: calc((100% / 2));
+}
+
+.header-container {
+  /* max-width: 100%; */
+  max-width: var(--max-width);
+  margin: 0px auto;
+  background-color: #202020;
+  padding: 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.header-container > div {
+  width: 100px;
+  height: 40px;
+  /* border: sol    id red 1px; */
+}
+
+.header-container div > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-nav > span {
+  font-size: 20px;
+}
+
+.header-nav .favorites {
+  font-size: inherit;
+  border: inherit;
+  height: 30px;
+  padding: 5px;
+  border: solid 1px grey;
+  border-radius: 10px;
+  /* background-color: rgba(0, 0, 0, 0.196); */
+}
+
+/* ----------------------- */
+
+/* -- main */
+.main-container {
+  max-width: var(--main-width);
+  margin: 0px auto;
+  padding: 10px;
+  /* border: solid red 1px; */
+  /* background-color: #202020; */
+}
+/* .main-container h1 {
+  font-size: 40px;
+} */
+
+/* ----- pagination */
+.page-char {
+  display: flex;
+  gap: 5px;
+  /* margin: 20px auto; */
+}
+
+.page-char span::active {
+  background-color: tomato;
+}
+
+.page-text {
+  font-size: 18px;
+  text-align: center;
+  padding: 10px;
+}
+
+.page-text:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.page-select {
+  font-size: inherit;
+  border: inherit;
+  color: inherit;
+  height: 30px;
+  /* border: solid 1px grey; */
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.196);
+}
+.page-select:focus {
+  outline: none;
+}
+
+/* ------- */
+/* ------- */
+.character-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  /* border: solid red 1px; */
+}
+.character-card {
+  width: 400px;
+  /* height: 300px; */
+  /* color: white; */
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  padding-bottom: 20px;
+  position: relative;
+  gap: 10px;
+  border: solid 1px grey;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #20202050;
+}
+.character-card h2 {
+  font-family: "Lucida Sans", sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+
+  margin-top: 5px;
+}
+
+.character-card a > p:hover {
+  cursor: pointer;
+  color: lightcoral;
+}
+
+/* --- favorite icon */
+.character-card .favorite-icon-char {
+  position: absolute;
+  /* color: white; */
+  top: 20px;
+  right: 15px;
+  height: 30px;
+}
+.favorite-icon-char svg:hover {
+  cursor: pointer;
+  color: lightblue;
+}
+
+/* character description */
+.character-card > p:nth-of-type(2) {
+  margin-bottom: 20px;
+  /* color: red; */
+}
+
+.character-card img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* ----------------- */
+/* ------Comics------- */
+/* ----------------- */
+.comic-main-container {
+  max-width: var(--main-width);
+  margin: 0px auto;
+}
+/* .comic-main-container h1 {
+  font-size: 40px;
+  margin: 10px auto;
+} */
+
+.comic-header-like {
+  position: relative;
+  display: flex;
+  align-items: center;
+  /* border: solid red 1px; */
+  gap: 20px;
+  padding: 10px;
+}
+.comic-header-like input {
+  height: 40px;
+  width: 600px;
+  border: solid 1px;
+  border-radius: 20px;
+  font-size: 16px;
+  padding: 5px 0 5px 40px;
+  background-color: #0000009b;
+  border-color: grey;
+}
+.comic-header-like input:focus {
+  outline: none;
+}
+
+.comic-header-like input:hover {
+  background-color: white;
+}
+
+.comic-header-like input::placeholder {
+  color: lightgray;
+  font-style: italic;
+}
+.comic-header-like svg {
+  position: absolute;
+  left: 20px;
+  color: black;
+}
+
+.comic-container {
+  /* max-width: 1300px;
+  margin: 0px auto; */
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  gap: 50px;
+  /* border: solid 1px red; */
+}
+
+.comic-card {
+  display: flex;
+  gap: 10px;
+  /* border: solid grey 1px; */
+  padding: 5px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.comic-card > div {
+  width: 300px;
+  border-radius: 8px;
+  margin-top: 30px;
+  /* align-self: center; */
+  /* border: solid 1px black; */
+  position: relative;
+}
+
+.comic-card .favorite-icon-com {
+  position: absolute;
+  /* color: red; */
+  top: 200px;
+  left: -50px;
+  height: 30px;
+}
+
+.comic-card .favorite-icon-com:hover {
+  color: tomato;
+}
+
+.comic-card .favorite-icon-com-detail {
+  position: absolute;
+  color: red;
+  top: -20px;
+  left: -70px;
+  height: 40px;
+}
+
+.comic-card .favorite-icon-com-detail:hover {
+  color: tomato;
+}
+
+/* title */
+.comic-card > div h2 {
+  /* text-align: center; */
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* description */
+.comic-card > div > p {
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.449);
+  line-height: 22px;
+  text-align: justify;
+}
+
+/* --more detail */
+.comic-card > div > section > p {
+  margin-top: 10px;
+  text-decoration: underline;
+}
+.comic-card > div > section > p:hover {
+  color: lightblue;
+  cursor: pointer;
+}
+
+.comic-card img {
+  width: 500px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 50px 0px;
+}
+
+/* -------------------*/
+/* ---comic detail---- */
+/* ------------------- */
+.comic-detail {
+  /* border: solid red 1px; */
+  margin-top: 30px;
+  width: 1200px;
+  /* color: white; */
+}
+.comic-detail > div > p {
+  /* color: white; */
+  font-size: 14px;
+}
+.comic-detail > div {
+  align-items: center;
+}
+
+.comic-detail > div:nth-of-type(1) {
+  width: 600px;
+  height: fit-content;
+  padding: 10px;
+  background-color: #1c2630ce;
+  border-radius: 5px 30px;
+}
+
+/* --redefine  */
+.comic-detail > div:nth-of-type(1) h2 {
+  font-family: "Lucida Sans", sans-serif;
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.comic-detail img {
+  width: 800px;
+  height: 80vh;
+}
+/* ------------------- */
+/* ------------------- */
