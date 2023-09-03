@@ -12,6 +12,7 @@ const ComicCard = ({
   handleFavorites,
   userFavorites,
   favoriteType,
+  token,
 }) => {
   const [isExpended, setIsExpended] = useState(false);
 
@@ -49,6 +50,7 @@ const ComicCard = ({
           handleFavorites={handleFavorites}
           favoriteType={favoriteType}
           className="favorite-icon-com "
+          token={token}
         />
       </div>
     </div>

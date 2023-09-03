@@ -7,7 +7,12 @@ import CharacterCard from "../components/CharacterCard";
 
 const endpoint = "/character-comics";
 
-const CharacterComics = ({ handleFavorites, userFavorites, favorite }) => {
+const CharacterComics = ({
+  handleFavorites,
+  userFavorites,
+  favorite,
+  setNavBarVisibility,
+}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
   const { characterId } = useParams();
@@ -33,7 +38,13 @@ const CharacterComics = ({ handleFavorites, userFavorites, favorite }) => {
   ) : (
     <section className="main-container">
       <h1>{data.name} : Comics </h1>
-      <div className="character-container">
+      <div
+        className="character-container"
+        onClick={(event) => {
+          event.stopPropagation();
+          setNavBarVisibility(false);
+        }}
+      >
         {favorite.toLowerCase() === "comics" &&
         userFavorites.comics &&
         userFavorites.comics.length > 0

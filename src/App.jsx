@@ -24,9 +24,17 @@ import {
   faMagnifyingGlass,
   faUser,
   faCamera,
+  faBars,
 } from "@fortawesome/free-solid-svg-icons";
 import apiClient from "./api/client";
-library.add(faBookmark, faThumbsUp, faMagnifyingGlass, faUser, faCamera);
+library.add(
+  faBookmark,
+  faThumbsUp,
+  faMagnifyingGlass,
+  faUser,
+  faCamera,
+  faBars
+);
 
 function App() {
   const [userFavorites, setUserFavorites] = useState({
@@ -37,6 +45,7 @@ function App() {
   const [favorite, setFavorite] = useState("Favorites");
   const [mode, setMode] = useState(true); // dark
   const [token, setToken] = useState(Cookies.get("token" || null));
+  const [navbarVisibility, setNavBarVisibility] = useState(true);
 
   // ----------
   const handleFavorites = async (favoriteType, id, del) => {
@@ -103,6 +112,8 @@ function App() {
       document.body.style.color = "#202020";
     }
 
+    const matchMedia = window.matchMedia("(max-width:859px)");
+
     const fetchFavorites = async () => {
       if (token) {
         try {
@@ -144,17 +155,25 @@ function App() {
         mode={mode}
         token={token}
         setToken={setToken}
+        navbarVisibility={navbarVisibility}
+        setNavBarVisibility={setNavBarVisibility}
       />
       <Routes>
-        {/* <Route
+        <Route
           path="/"
           element={
             <Characters
               userFavorites={userFavorites}
               handleFavorites={handleFavorites}
+              showFavorites={showFavorites}
+              setShowFavorites={setShowFavorites}
+              favorite={favorite}
+              setFavorite={setFavorite}
+              setNavBarVisibility={setNavBarVisibility}
+              token={token}
             />
           }
-        /> */}
+        />
         <Route
           path="/characters"
           element={
@@ -165,6 +184,7 @@ function App() {
               setShowFavorites={setShowFavorites}
               favorite={favorite}
               setFavorite={setFavorite}
+              setNavBarVisibility={setNavBarVisibility}
             />
           }
         />
@@ -175,6 +195,7 @@ function App() {
               handleFavorites={handleFavorites}
               userFavorites={userFavorites}
               favorite={favorite}
+              setNavBarVisibility={setNavBarVisibility}
             />
           }
         />
@@ -185,6 +206,8 @@ function App() {
               userFavorites={userFavorites}
               handleFavorites={handleFavorites}
               favorite={favorite}
+              setNavBarVisibility={setNavBarVisibility}
+              token={token}
             />
           }
         />

@@ -17,22 +17,47 @@ const Characters = ({
   setShowFavorites,
   favorite,
   setFavorite,
+  setNavBarVisibility,
+  token,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
   const [page, setPage] = useState(1);
   const [pageArray, setPageArray] = useState([]);
   const [search, setSearch] = useState("");
+  const [clickSeacrhOptions, setClickSeacrhOptions] = useState(false);
+
+  const handleSumbitSearch = (character) => {
+    if (
+      (character.title && character.title.includes("(")) ||
+      (character.name && character.name.includes("("))
+    ) {
+      setSearch(
+        (character.title &&
+          character.title.slice(0, character.title.indexOf("("))) ||
+          (character.name &&
+            character.name.slice(0, character.name.indexOf("(")))
+      );
+    } else {
+      setSearch(character.title || character.name);
+    }
+    setClickSeacrhOptions(true);
+  };
 
   useEffect(() => {
     try {
       const fetchData = async () => {
         const limit = 100;
+        // const invalid = /[°"§%()\[\]{}=\\?´`'#<>|,;.:+_-]+/g;
         const response = await apiClient.get(
-          `${endpoint}?name=${search}&limit=${limit}&skip=${(page - 1) * 100}`
+          `${endpoint}?name=${search.slice(
+            0,
+            search.indexOf("(")
+          )}&limit=${limit}&skip=${(page - 1) * 100}`
         );
 
         setData(response.data);
+        console.log(response.data, "here");
         setIsLoading(false);
         const numberOfPages = Math.ceil(response.data.count / limit);
 
@@ -56,44 +81,70 @@ const Characters = ({
     <progress value={null} />
   ) : (
     <>
-      <main className="main-container">
+      <main
+        className="main-container"
+        onClick={() => {
+          setClickSeacrhOptions(true);
+        }}
+      >
         <h1>Characters</h1>
         {/* <label htmlFor="search"> */}
-        <div className="comic-header-like">
-          <FontAwesomeIcon icon="magnifying-glass" />
-          <input
-            type="text"
-            name="search"
-            id="search"
-            onChange={(event) => {
-              setSearch(event.target.value);
-            }}
-          />{" "}
-          {search && <span>found {data.results.length} results</span>}
+        <div
+          className="comic-header-like character-header-like"
+          onClick={(event) => {
+            event.stopPropagation();
+          }}
+        >
+          <div>
+            <FontAwesomeIcon icon="magnifying-glass" />
+            <input
+              type="text"
+              name="search"
+              id="search"
+              value={search}
+              placeholder="Search characters"
+              onChange={(event) => {
+                setSearch(event.target.value);
+                setClickSeacrhOptions(false);
+              }}
+            />
+            {!clickSeacrhOptions && (
+              <ul>
+                {search &&
+                  data.results &&
+                  data.results.map((character, index) => {
+                    return (
+                      <li
+                        key={index}
+                        onClick={() => {
+                          handleSumbitSearch(character);
+                        }}
+                      >
+                        {character.title || character.name}
+                      </li>
+                    );
+                  })}
+              </ul>
+            )}
+          </div>{" "}
+          {search && data.results && (
+            <span>found {data.results && data.results.length} results</span>
+          )}
           {/* </label> */}
           <Pagination pageArray={pageArray} page={page} setPage={setPage} />
         </div>
-        <p
-          style={{ margin: "20px" }}
-          onClick={() => {
-            setShowFavorites(!showFavorites);
+        <div
+          className="character-container"
+          onClick={(event) => {
+            event.stopPropagation();
           }}
         >
-          {showFavorites ? "Show all" : "Show favorites"}
-        </p>
-        <p
-          onClick={() => {
-            handleFavorites("char", null, true);
-          }}
-        >
-          delete favorites
-        </p>
-        <div className="character-container">
           {/* {showFavorites && */}
           {favorite.toLowerCase() === "characters" &&
           userFavorites.characters &&
           userFavorites.characters.length > 0
-            ? data.results
+            ? data.results &&
+              data.results
                 .filter((elem) => userFavorites.characters.includes(elem._id))
                 .map((character, index) => {
                   return (
@@ -108,6 +159,7 @@ const Characters = ({
                   );
                 })
             : favorite.toLowerCase() === "favorites" &&
+              data.results &&
               data.results.map((character, index) => {
                 return (
                   <CharacterCard
@@ -117,6 +169,7 @@ const Characters = ({
                     handleFavorites={handleFavorites}
                     favoriteType="characters"
                     key={character._id}
+                    token={token}
                   />
                 );
               })}

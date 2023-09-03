@@ -11,9 +11,9 @@ const CharacterCard = ({
   handleFavorites,
   userFavorites,
   favoriteType,
+  token,
 }) => {
-  // const [selected, setSelected] = useState(false);
-  // console.log(userFavorites);
+  const [isExpended, setIsExpended] = useState(false);
   return (
     <div className={className}>
       <Link to={`/character-comics/${dataItem._id}`}>
@@ -29,13 +29,24 @@ const CharacterCard = ({
         handleFavorites={handleFavorites}
         favoriteType={favoriteType}
         className="favorite-icon-char"
+        token={token}
       />
       {dataItem.description && (
-        <p>
-          {dataItem.description.length > 100
-            ? dataItem.description.slice(0, 100) + "..."
-            : dataItem.description}
-        </p>
+        <section className="text-more-less">
+          {dataItem.description.length < 65
+            ? dataItem.description
+            : isExpended
+            ? dataItem.description
+            : dataItem.description.slice(0, 65)}
+          {dataItem.description.length > 65 && (
+            <p onClick={() => setIsExpended(!isExpended)}>
+              {isExpended ? "less" : "more"}
+            </p>
+          )}
+          {/* {dataItem.description.length > 100
+           ? dataItem.description.slice(0, 100) + "..."
+           : dataItem.description} */}
+        </section>
       )}
     </div>
   );

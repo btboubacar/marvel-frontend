@@ -10,13 +10,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //
 const endpoint = "/comics";
 
-const Comics = ({ userFavorites, handleFavorites, favorite }) => {
+const Comics = ({ userFavorites, handleFavorites, favorite, token }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
   const [page, setPage] = useState(1);
   const [pageArray, setPageArray] = useState([]);
   const [search, setSearch] = useState("");
+  const [clickSeacrhOptions, setClickSeacrhOptions] = useState(false);
 
+  const handleSumbitSearch = (character) => {
+    if (
+      (character.title && character.title.includes("(")) ||
+      (character.name && character.name.includes("("))
+    ) {
+      setSearch(
+        (character.title &&
+          character.title.slice(0, character.title.indexOf("("))) ||
+          (character.name &&
+            character.name.slice(0, character.name.indexOf("(")))
+      );
+    } else {
+      setSearch(character.title || character.name);
+    }
+    setClickSeacrhOptions(true);
+  };
   useEffect(() => {
     try {
       const fetchData = async () => {
@@ -48,9 +65,19 @@ const Comics = ({ userFavorites, handleFavorites, favorite }) => {
   return isLoading ? (
     <progress value={null} />
   ) : (
-    <main className="comic-main-container">
+    <main
+      className="comic-main-container"
+      onClick={() => {
+        setClickSeacrhOptions(true);
+      }}
+    >
       <h1>Comics</h1>
-      <div className="comic-header-like">
+      <div
+        className="comic-header-like"
+        onClick={(event) => {
+          event.stopPropagation();
+        }}
+      >
         {/* <label htmlFor="search"> */}
         <FontAwesomeIcon icon="magnifying-glass" />
         <input
@@ -60,8 +87,27 @@ const Comics = ({ userFavorites, handleFavorites, favorite }) => {
           placeholder="Search comics"
           onChange={(event) => {
             setSearch(event.target.value);
+            setClickSeacrhOptions(false);
           }}
-        />{" "}
+        />
+        {!clickSeacrhOptions && (
+          <ul className="comic-ul">
+            {search &&
+              data.results &&
+              data.results.map((character, index) => {
+                return (
+                  <li
+                    key={index}
+                    onClick={() => {
+                      handleSumbitSearch(character);
+                    }}
+                  >
+                    {character.title || character.name}
+                  </li>
+                );
+              })}
+          </ul>
+        )}{" "}
         {search && <span>found {data.results.length} results</span>}
         {/* </label> */}
         <Pagination pageArray={pageArray} page={page} setPage={setPage} />
@@ -97,6 +143,7 @@ const Comics = ({ userFavorites, handleFavorites, favorite }) => {
                     handleFavorites={handleFavorites}
                     favoriteType="comics"
                     className="comic-card"
+                    token={token}
                     key={character._id}
                   />
                 );

@@ -22,8 +22,9 @@ class SliderSwitch extends Component {
           checked={this.props.mode}
           offColor="#2CB1BA"
           // onColor="#2CB1BA"
-          handleDiameter={25}
+          handleDiameter={20}
           width={60}
+          height={25}
           uncheckedIcon={<div></div>}
           uncheckedHandleIcon={
             <div

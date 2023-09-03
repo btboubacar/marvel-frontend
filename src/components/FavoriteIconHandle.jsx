@@ -8,19 +8,26 @@ const FavoriteIconHandle = ({
   dataItem,
   handleFavorites,
   className,
+  token,
 }) => {
   const location = useLocation();
   // console.log(location);
   // console.log(location.pathname, `/comic/${dataItem._id}`);
 
   const handleBookmarkClick = () => {
-    const isPresent = userFavorites[favoriteType]
-      ? userFavorites[favoriteType].find((id) => id === dataItem._id)
-      : false;
+    if (token) {
+      const isPresent = userFavorites[favoriteType]
+        ? userFavorites[favoriteType].find((id) => id === dataItem._id)
+        : false;
 
-    // if isPresent => delete id by sending false; else true
+      // if isPresent => delete id by sending false; else true
 
-    handleFavorites(favoriteType, dataItem._id, !isPresent ? false : true);
+      handleFavorites(favoriteType, dataItem._id, !isPresent ? false : true);
+    } else {
+      alert(
+        "Unauthorized ! \nonly registered users can set up bookmarks/favorites"
+      );
+    }
   };
 
   return (
@@ -46,7 +53,7 @@ const FavoriteIconHandle = ({
             userFavorites[favoriteType] &&
             userFavorites[favoriteType].includes(dataItem._id)
               ? "red"
-              : "skyblue",
+              : "darkcyan",
         }}
       />
     </>
