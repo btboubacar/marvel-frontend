@@ -6,14 +6,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from "js-cookie";
 
 const Header = ({
-  userFavorites,
-  handleFavorites,
   setFavorite,
   favorite,
   mode,
   setMode,
   token,
   setToken,
+  userFavorites,
+  setUserFavorites,
 }) => {
   return (
     <header className="container">
@@ -49,6 +49,11 @@ const Header = ({
             <button
               style={{ backgroundColor: "tomato" }}
               onClick={() => {
+                setUserFavorites({
+                  ...userFavorites,
+                  characters: [],
+                  comics: [],
+                });
                 Cookies.remove("token");
                 setToken(null);
               }}

@@ -25,83 +25,71 @@ import {
   faUser,
   faCamera,
 } from "@fortawesome/free-solid-svg-icons";
+import apiClient from "./api/client";
 library.add(faBookmark, faThumbsUp, faMagnifyingGlass, faUser, faCamera);
 
 function App() {
-  // console.log(typeof Cookies.get("__marvel_char_favorites"));
   const [userFavorites, setUserFavorites] = useState({
-    characters:
-      (Cookies.get("__marvel_char_favorites") &&
-        JSON.parse(Cookies.get("__marvel_char_favorites"))) ||
-      "",
-    comics:
-      (Cookies.get("__marvel_com_favorites") &&
-        JSON.parse(Cookies.get("__marvel_com_favorites"))) ||
-      "",
+    characters: [],
+    comics: [],
   });
-
   const [showFavorites, setShowFavorites] = useState(false);
   const [favorite, setFavorite] = useState("Favorites");
   const [mode, setMode] = useState(true); // dark
   const [token, setToken] = useState(Cookies.get("token" || null));
 
   // ----------
-  const handleFavorites = (favoriteType, id, del) => {
+  const handleFavorites = async (favoriteType, id, del) => {
     let type = "";
     if (favoriteType === "characters") type = "char";
     else if (favoriteType === "comics") type = "com";
-
-    //
-    let value = [];
-    // del -> true => delete; false :  no delete
     console.log("inside handleFavorites", type, del, id);
-    if (type && !id && del) {
-      console.log("inside delete all type");
-      const copyFavorites = { ...userFavorites };
-      if (type === "char") {
-        copyFavorites.characters = "";
-      } else {
-        copyFavorites.comics = "";
-      }
 
-      Cookies.remove(`__marvel_${type}_favorites`);
-      setUserFavorites(copyFavorites);
-    } else {
-      if (type && id && !del) {
-        if (Cookies.get(`__marvel_${type}_favorites`)) {
-          value = JSON.parse(Cookies.get(`__marvel_${type}_favorites`));
-          console.log(value, typeof value);
-          value.push(id);
-          console.log("inside 1");
-        } else {
-          value = [id];
-          console.log("inside 2");
-          console.log(value);
-        }
-      } else if (type && id && del) {
-        console.log("inside delete");
-        value = JSON.parse(Cookies.get(`__marvel_${type}_favorites`));
-        console.log("value before filter", value);
-        value = value.filter((item) => {
-          console.log("item filter", item, id);
-          return item !== id;
+    if (type && id && !del) {
+      try {
+        const response = await apiClient.post(
+          "/favorites",
+          {
+            type: favoriteType,
+            id: id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const obj = response.data.userFavorites;
+        setUserFavorites({
+          ...userFavorites,
+          characters: [...obj.characters],
+          comics: [...obj.comics],
         });
-        console.log("value after filter", value);
+        //
+        //}
+      } catch (error) {
+        console.log(error.response);
       }
-      const copyFavorites = { ...userFavorites };
-      if (type === "char") {
-        copyFavorites.characters = value;
-      } else {
-        copyFavorites.comics = value;
-      }
-      if (value.length > 0)
-        Cookies.set(`__marvel_${type}_favorites`, JSON.stringify(value), {
-          expires: 15,
+    } else if (type && id && del) {
+      try {
+        // db
+        const response = await apiClient.delete(
+          `/favorites?type=${favoriteType}&id=${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const obj = response.data.userFavorites;
+        setUserFavorites({
+          ...userFavorites,
+          characters: [...obj.characters],
+          comics: [...obj.comics],
         });
-      else {
-        Cookies.remove(`__marvel_${type}_favorites`);
+      } catch (error) {
+        console.log(error.response);
       }
-      setUserFavorites(copyFavorites);
     }
   };
 
@@ -114,12 +102,41 @@ function App() {
       document.body.style.backgroundColor = "white";
       document.body.style.color = "#202020";
     }
-  }, [mode]);
+
+    const fetchFavorites = async () => {
+      if (token) {
+        try {
+          const response = await apiClient.get("/favorites", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          const obj = response.data.userFavorites;
+          setUserFavorites({
+            ...userFavorites,
+            characters: [...obj.characters],
+            comics: [...obj.comics],
+          });
+        } catch (error) {
+          console.log(error.response);
+        }
+      } else {
+        setUserFavorites({
+          ...userFavorites,
+          characters: [],
+          comics: [],
+        });
+      }
+    };
+
+    fetchFavorites();
+  }, [mode, token]);
 
   return (
     <Router>
       <Header
         userFavorites={userFavorites}
+        setUserFavorites={setShowFavorites}
         handleFavorites={handleFavorites}
         favorite={favorite}
         setFavorite={setFavorite}

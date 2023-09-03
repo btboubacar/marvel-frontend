@@ -10,8 +10,19 @@ const FavoriteIconHandle = ({
   className,
 }) => {
   const location = useLocation();
-  console.log(location);
-  console.log(location.pathname, `/comic/${dataItem._id}`);
+  // console.log(location);
+  // console.log(location.pathname, `/comic/${dataItem._id}`);
+
+  const handleBookmarkClick = () => {
+    const isPresent = userFavorites[favoriteType]
+      ? userFavorites[favoriteType].find((id) => id === dataItem._id)
+      : false;
+
+    // if isPresent => delete id by sending false; else true
+
+    handleFavorites(favoriteType, dataItem._id, !isPresent ? false : true);
+  };
+
   return (
     <>
       {/* <ReactTooltip
@@ -27,19 +38,7 @@ const FavoriteIconHandle = ({
             ? "favorite-icon-com-detail"
             : className
         }
-        onClick={() => {
-          const isPresent = userFavorites[favoriteType]
-            ? userFavorites[favoriteType].find((id) => id === dataItem._id)
-            : false;
-
-          // if isPresent => delete id by sending false; else true
-
-          handleFavorites(
-            favoriteType,
-            dataItem._id,
-            !isPresent ? false : true
-          );
-        }}
+        onClick={handleBookmarkClick}
         onMouseOver={() => {}}
         style={{
           color:
