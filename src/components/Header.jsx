@@ -90,7 +90,7 @@ const Header = ({
           </nav>
           <div className="account">
             {token ? (
-              <button
+              <span
                 style={{ backgroundColor: "tomato" }}
                 onClick={() => {
                   setUserFavorites({
@@ -103,7 +103,7 @@ const Header = ({
                 }}
               >
                 logout
-              </button>
+              </span>
             ) : (
               <div>
                 <Link to={"/login"}>
