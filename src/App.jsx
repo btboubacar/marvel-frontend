@@ -10,7 +10,7 @@ import Header from "./components/Header";
 
 // Pages
 import Characters from "./pages/Characters";
-import CharacterComics from "./pages/Character-Comics";
+import CharacterComics from "./pages/CharacterComics";
 import Comics from "./pages/Comics";
 import ComicDetail from "./pages/ComicDetail";
 import Signup from "./pages/Signup";
@@ -195,7 +195,6 @@ function App() {
               handleFavorites={handleFavorites}
               userFavorites={userFavorites}
               favorite={favorite}
-              setNavBarVisibility={setNavBarVisibility}
               token={token}
             />
           }

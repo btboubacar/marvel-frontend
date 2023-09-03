@@ -12,7 +12,6 @@ const CharacterComics = ({
   handleFavorites,
   userFavorites,
   favorite,
-  setNavBarVisibility,
   token,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,9 +22,6 @@ const CharacterComics = ({
   useEffect(() => {
     const fetchData = async () => {
       const response = await apiClient.get(`${endpoint}/${characterId}`);
-      // const response = await apiClient.get(
-      //   `${endpoint}/5fcf91f4d8a2480017b91453`
-      // );
 
       setData(response.data);
       setIsLoading(false);
