@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 //
 import FavoriteIconHandle from "./FavoriteIconHandle";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const CharacterCard = ({
   dataItem,

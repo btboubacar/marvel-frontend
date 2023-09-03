@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 //
 import apiClient from "../api/client";
 import CharacterCard from "../components/CharacterCard";
+import ComicCard from "../components/ComicCard";
 
 const endpoint = "/character-comics";
 
@@ -43,7 +44,7 @@ const CharacterComics = ({
         className="character-container"
         onClick={(event) => {
           event.stopPropagation();
-          setNavBarVisibility(false);
+          // setNavBarVisibility(false);
         }}
       >
         {favorite.toLowerCase() === "comics" &&
@@ -53,12 +54,13 @@ const CharacterComics = ({
               .filter((elem) => userFavorites.comics.includes(elem._id))
               .map((comic, index) => {
                 return (
-                  <CharacterCard
+                  <ComicCard
                     dataItem={comic}
                     userFavorites={userFavorites}
                     handleFavorites={handleFavorites}
                     favoriteType="comics"
-                    className="character-card"
+                    // className="character-card"
+                    className="comic-card"
                     token={token}
                     key={comic._id}
                   />
@@ -66,12 +68,13 @@ const CharacterComics = ({
               })
           : favorite.toLowerCase() === "favorites" &&
             data.comics.map((comic, index) => (
-              <CharacterCard
+              <ComicCard
                 dataItem={comic}
                 userFavorites={userFavorites}
                 handleFavorites={handleFavorites}
                 favoriteType="comics"
-                className="character-card"
+                // className="character-card"
+                className="comic-card"
                 token={token}
                 key={comic._id}
               />

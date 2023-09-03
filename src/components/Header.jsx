@@ -68,22 +68,10 @@ const Header = ({
         >
           <nav className="header-nav">
             <Link to="/characters">
-              <span
-                onClick={() => {
-                  setNavBarVisibility(false);
-                }}
-              >
-                Characters
-              </span>
+              <span>Characters</span>
             </Link>
             <Link to="/comics">
-              <span
-                onClick={() => {
-                  setNavBarVisibility(false);
-                }}
-              >
-                Comics
-              </span>
+              <span>Comics</span>
             </Link>
             <select
               name="favorites"
@@ -93,9 +81,6 @@ const Header = ({
               className="favorites"
               onChange={(event) => {
                 setFavorite(event.target.value);
-              }}
-              onClick={() => {
-                setNavBarVisibility(false);
               }}
             >
               <option selected>Favorites (none)</option>
@@ -122,23 +107,10 @@ const Header = ({
             ) : (
               <div>
                 <Link to={"/login"}>
-                  <span
-                    onClick={() => {
-                      setNavBarVisibility(false);
-                    }}
-                  >
-                    Login
-                  </span>{" "}
-                  {" | "}
+                  <span>Login</span> {" | "}
                 </Link>
                 <Link to={"/signup"}>
-                  <span
-                    onClick={() => {
-                      setNavBarVisibility(false);
-                    }}
-                  >
-                    Signup
-                  </span>
+                  <span>Signup</span>
                 </Link>
                 <FontAwesomeIcon icon="user" className="user" />
               </div>
