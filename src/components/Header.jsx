@@ -83,7 +83,7 @@ const Header = ({
                 setFavorite(event.target.value);
               }}
             >
-              <option selected>Favorites (none)</option>
+              <option selected>Favorites</option>
               <option>Characters</option>
               <option>Comics</option>
             </select>

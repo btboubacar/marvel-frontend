@@ -158,7 +158,7 @@ const Characters = ({
                     />
                   );
                 })
-            : favorite.toLowerCase() === "favorites (none)" &&
+            : favorite.toLowerCase() === "favorites" &&
               data.results &&
               data.results.map((character, index) => {
                 return (
