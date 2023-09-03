@@ -13,12 +13,15 @@ const ComicCard = ({
   userFavorites,
   favoriteType,
   token,
+  char,
 }) => {
   const [isExpended, setIsExpended] = useState(false);
 
   return (
     <div className={className}>
-      <Link to={`/comic/${dataItem._id}`}>
+      <Link
+        to={char === true ? `/comic/${dataItem._id}` : `/comic/${dataItem._id}`}
+      >
         <img
           src={`${dataItem.thumbnail.path}.${dataItem.thumbnail.extension}`}
           alt={dataItem.name}

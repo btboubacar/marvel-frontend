@@ -63,6 +63,7 @@ const CharacterComics = ({
                     className="comic-card"
                     token={token}
                     key={comic._id}
+                    char={true}
                   />
                 );
               })
@@ -77,6 +78,7 @@ const CharacterComics = ({
                 className="comic-card"
                 token={token}
                 key={comic._id}
+                char={true}
               />
             ))}
       </div>

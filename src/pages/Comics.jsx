@@ -129,6 +129,7 @@ const Comics = ({ userFavorites, handleFavorites, favorite, token }) => {
                     className="comic-card"
                     token={token}
                     key={character._id}
+                    char={false}
                   />
                 );
               })
@@ -145,6 +146,7 @@ const Comics = ({ userFavorites, handleFavorites, favorite, token }) => {
                     className="comic-card"
                     token={token}
                     key={character._id}
+                    char={false}
                   />
                 );
               })}
