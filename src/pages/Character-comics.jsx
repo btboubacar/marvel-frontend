@@ -12,6 +12,7 @@ const CharacterComics = ({
   userFavorites,
   favorite,
   setNavBarVisibility,
+  token,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
@@ -31,7 +32,7 @@ const CharacterComics = ({
     };
 
     fetchData();
-  }, []);
+  }, [characterId]);
 
   return isLoading ? (
     <p>Loading ... </p>
@@ -58,6 +59,7 @@ const CharacterComics = ({
                     handleFavorites={handleFavorites}
                     favoriteType="comics"
                     className="character-card"
+                    token={token}
                     key={comic._id}
                   />
                 );
@@ -70,6 +72,7 @@ const CharacterComics = ({
                 handleFavorites={handleFavorites}
                 favoriteType="comics"
                 className="character-card"
+                token={token}
                 key={comic._id}
               />
             ))}

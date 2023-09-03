@@ -196,6 +196,7 @@ function App() {
               userFavorites={userFavorites}
               favorite={favorite}
               setNavBarVisibility={setNavBarVisibility}
+              token={token}
             />
           }
         />

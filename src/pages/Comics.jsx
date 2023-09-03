@@ -37,7 +37,6 @@ const Comics = ({ userFavorites, handleFavorites, favorite, token }) => {
   useEffect(() => {
     try {
       const fetchData = async () => {
-        const title = "";
         const limit = 100;
         const response = await apiClient.get(
           `${endpoint}?title=${search}&limit=${limit}&skip=${(page - 1) * 100}`
@@ -128,6 +127,7 @@ const Comics = ({ userFavorites, handleFavorites, favorite, token }) => {
                     handleFavorites={handleFavorites}
                     favoriteType="comics"
                     className="comic-card"
+                    token={token}
                     key={character._id}
                   />
                 );

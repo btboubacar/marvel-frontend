@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import apiClient from "../api/client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -13,11 +12,11 @@ const endpoint = "/characters";
 const Characters = ({
   userFavorites,
   handleFavorites,
-  showFavorites,
-  setShowFavorites,
+  // showFavorites,
+  // setShowFavorites,
   favorite,
-  setFavorite,
-  setNavBarVisibility,
+  // setFavorite,
+  // setNavBarVisibility,
   token,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -154,6 +153,7 @@ const Characters = ({
                       userFavorites={userFavorites}
                       handleFavorites={handleFavorites}
                       favoriteType="characters"
+                      token={token}
                       key={character._id}
                     />
                   );
