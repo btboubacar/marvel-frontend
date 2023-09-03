@@ -163,6 +163,10 @@ progress {
   text-decoration: underline;
 }
 
+.logout:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
 /* ----------------------- */
 
 /* -- main */

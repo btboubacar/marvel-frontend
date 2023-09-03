@@ -91,6 +91,7 @@ const Header = ({
           <div className="account">
             {token ? (
               <span
+                className="logout"
                 style={{ backgroundColor: "tomato" }}
                 onClick={() => {
                   setUserFavorites({
