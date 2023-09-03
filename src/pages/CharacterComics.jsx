@@ -63,7 +63,7 @@ const CharacterComics = ({
                   />
                 );
               })
-          : favorite.toLowerCase() === "favorites" &&
+          : favorite.toLowerCase() === "favorites (none)" &&
             data.comics.map((comic, index) => (
               <ComicCard
                 dataItem={comic}

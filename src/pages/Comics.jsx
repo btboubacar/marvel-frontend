@@ -133,7 +133,7 @@ const Comics = ({ userFavorites, handleFavorites, favorite, token }) => {
                   />
                 );
               })
-          : favorite.toLowerCase() === "favorites" &&
+          : favorite.toLowerCase() === "favorites (none)" &&
             data.results
               .sort((charA, charB) => charA.title.localeCompare(charB.title))
               .map((character, index) => {
