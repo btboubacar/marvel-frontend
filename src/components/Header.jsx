@@ -119,10 +119,10 @@ const Header = ({
             ) : (
               <div>
                 <Link to={"/login"}>
-                  <span>Login</span> {" | "}
+                  <span onClick={handleClickNavBarLinks}>Login</span> {" | "}
                 </Link>
                 <Link to={"/signup"}>
-                  <span>Signup</span>
+                  <span onClick={handleClickNavBarLinks}>Signup</span>
                 </Link>
                 <FontAwesomeIcon icon="user" className="user" />
               </div>
