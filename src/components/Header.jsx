@@ -91,11 +91,12 @@ const Header = ({
               onChange={(event) => {
                 setFavorite(event.target.value);
               }}
-              onClick={handleClickNavBarLinks}
             >
-              <option selected>Favorites</option>
-              <option>Characters</option>
-              <option>Comics</option>
+              <option selected onClick={handleClickNavBarLinks}>
+                Favorites
+              </option>
+              <option onClick={handleClickNavBarLinks}>Characters</option>
+              <option onClick={handleClickNavBarLinks}>Comics</option>
             </select>
           </nav>
           <div className="account">
