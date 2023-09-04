@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import logo from "../assets/img/logo.png";
 import SliderSwitch from "../components/SliderSwitch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,14 +18,23 @@ const Header = ({
   setNavBarVisibility,
 }) => {
   const navigate = useNavigate();
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  const handleClickNavBarLinks = () => {
+    if (isSmallScreen) {
+      setNavBarVisibility(false);
+    }
+  };
 
   useEffect(() => {
     const matchMedia = window.matchMedia("(max-width:859px)");
     matchMedia.onchange = (event) => {
       if (event.matches) {
         setNavBarVisibility(false);
+        setIsSmallScreen(true);
       } else {
         setNavBarVisibility(true);
+        setIsSmallScreen(false);
       }
     };
   }, []);
@@ -68,10 +77,10 @@ const Header = ({
         >
           <nav className="header-nav">
             <Link to="/characters">
-              <span>Characters</span>
+              <span onClick={handleClickNavBarLinks}>Characters</span>
             </Link>
             <Link to="/comics">
-              <span>Comics</span>
+              <span onClick={handleClickNavBarLinks}>Comics</span>
             </Link>
             <select
               name="favorites"
@@ -82,6 +91,7 @@ const Header = ({
               onChange={(event) => {
                 setFavorite(event.target.value);
               }}
+              onClick={handleClickNavBarLinks}
             >
               <option selected>Favorites</option>
               <option>Characters</option>
@@ -101,6 +111,7 @@ const Header = ({
                   });
                   Cookies.remove("token");
                   setToken(null);
+                  handleClickNavBarLinks();
                 }}
               >
                 logout
