@@ -90,13 +90,12 @@ const Header = ({
               className="favorites"
               onChange={(event) => {
                 setFavorite(event.target.value);
+                handleClickNavBarLinks();
               }}
             >
-              <option selected onClick={handleClickNavBarLinks}>
-                Favorites
-              </option>
-              <option onClick={handleClickNavBarLinks}>Characters</option>
-              <option onClick={handleClickNavBarLinks}>Comics</option>
+              <option selected>Favorites</option>
+              <option>Characters</option>
+              <option>Comics</option>
             </select>
           </nav>
           <div className="account">
