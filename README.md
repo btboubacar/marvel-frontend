@@ -18,7 +18,7 @@ MARVEL app is a fully responsive and simplified version of a Marvel like website
 ## Screens captures
 
 <div>
-<img src="./src/assets/img/marvel_pages.gif" alt="page capture" style="max-width: 100vw; height: 600px; border-radius: 10px">
+<img src="./src/assets/img/marvel_pages.gif" alt="page capture" style="max-width: 100vw; height: 600px; border-radius: 50px">
 </div>
 
 ## Installation
